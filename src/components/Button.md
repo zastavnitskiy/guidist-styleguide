@@ -1,5 +1,5 @@
 Button example:
 
 ```js
-<Button pizza="🍕" />
+<Button>Order 🍕</Button>
 ```
