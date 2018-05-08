@@ -1,7 +1,18 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
+const devMode = process.env.NODE_ENV !== 'production'
+const {version} = require('./package.json');
 
 module.exports = {
+	plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: `[name].${version}.css`,
+			chunkFilename: `[name].${version}.css`,
+			path: path.resolve(__dirname, 'dist')
+    })
+  ],
 	module: {
 		rules: [
 			{
@@ -18,7 +29,7 @@ module.exports = {
 
 				use: [
 					{
-						loader: MiniCssExtractPlugin.loader
+						loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader
 					},
 					{
 						loader: 'css-loader',
@@ -30,12 +41,6 @@ module.exports = {
 					},
 					{
 						loader: 'postcss-loader',
-
-						options: {
-							plugins: function() {
-								return [precss, autoprefixer];
-							}
-						}
 					}
 				]
 			}
@@ -45,10 +50,8 @@ module.exports = {
 	entry: './src/index.js',
 
 	output: {
-		filename: '[name].[chunkhash].js',
-		chunkFilename: '[name].[chunkhash].js',
+		filename: `[name].${version}.js`,
+		chunkFilename: `[name].${version}.js`,
 		path: path.resolve(__dirname, 'dist')
-	},
-
-	mode: 'development'
+	}
 };

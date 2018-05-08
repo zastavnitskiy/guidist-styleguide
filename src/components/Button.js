@@ -1,3 +1,4 @@
 import React from 'react';
+import './style.css';
 
-export default ({children}) => (<button>{children}</button>);
+export default ({children}) => (<button className="btn">{children}</button>);
