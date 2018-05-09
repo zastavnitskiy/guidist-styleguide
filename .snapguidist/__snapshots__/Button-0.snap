@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button-1 1`] = `
+exports[`Button-0 1`] = `
 <button
-  className="bui-button bui-button--primary"
+  className="bui-button bui-button--secondary"
   type="button"
 >
   <span
